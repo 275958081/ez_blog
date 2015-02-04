@@ -1,0 +1,82 @@
+# -*- coding: utf-8 -*-
+# Create your views here.
+#from TestApp.forms import UEditorTestModelForm,TestUEditorForm
+from django.http import HttpResponse
+from django.shortcuts import render_to_response
+from blog.forms import BlogUEditorForm , BlogUEditorModelForm , AddBlogTypeForm
+from blog.models import cblog
+from django.views.decorators.csrf import csrf_protect
+from django.template import RequestContext
+from blog.template_process import css_and_js_render_part, header_part , blog_view_css_and_js_render ,get_toatl_blog_list
+#from TestApp.models import Blog
+
+def lp_main(req):
+    return render_to_response('main.html',{'css_and_js': css_and_js_render_part ,'header':header_part})
+    return HttpResponse('welcome to lipengs home page')
+
+@csrf_protect
+def add_blog(req):
+    if req.method == 'POST' :
+        form = BlogUEditorModelForm(req.POST)
+        if form.is_valid() :
+            #form.save()
+            new_blog = cblog()
+            new_blog.title = req.POST.get('title')
+            new_blog.context = req.POST.get('context')
+            new_blog.save()
+            new_blog = cblog()
+            new_blog.read_new_blog()
+            d = {'css_and_js':blog_view_css_and_js_render , 
+              'header':header_part,'blog_title': new_blog.title ,
+             'blog_time' :new_blog.time ,'blog_context' : new_blog.context ,
+              'total_blog_list': cblog.get_totao_blog_list(2) }
+            return render_to_response('blog_veiw.html',d)
+            return render_to_response('add_blog.html',{'form':form,'css_and_js':css_and_js_render_part , 'header':header_part} ,context_instance=RequestContext(req))
+        else :
+            return HttpResponse(u"error data")
+    else :
+        print 'HttpRequest.path ',req.path
+        print 'HttpRequest.path_info ' , req.path_info
+        try :
+            M = Blog.objects.get( pk =1 )
+            form = BlogUEditorModelForm( instance= M )
+        except:
+           form =  BlogUEditorModelForm( initial={'Description': 'test'})
+
+        blog_type_list = cblog.get_type_list()
+        return render_to_response(u'add_blog.html',{'form':form, 'css_and_js':css_and_js_render_part , 
+		'header':header_part ,
+		'type_items':blog_type_list},
+		context_instance = RequestContext(req))
+def ajaxcmd(request):
+    return HttpResponse(u"i come from background",content_type="plain/text")
+
+
+def read_new_blog(req):
+    print 'HttpRequest.path ',req.path
+    print 'HttpRequest.path_info ' , req.path_info
+    new_blog = cblog()
+    new_blog.read_new_blog()
+    d = {'css_and_js':blog_view_css_and_js_render , 
+         'header':header_part,'blog_title': new_blog.title ,
+         'blog_time' :new_blog.time ,'blog_context' : new_blog.context ,
+         'total_blog_list': cblog.get_totao_blog_list(2) }
+    return render_to_response('blog_veiw.html',d)
+
+
+
+@csrf_protect
+def add_blog_type(req):
+    if req.method == 'POST' :
+        form = AddBlogTypeForm(req.POST)
+        if form.is_valid() :
+            new_blog_type = req.POST.get('blog_type')
+            print new_blog_type
+            cblog.add_new_type(new_blog_type)
+            return render_to_response('add_blog_type.html',{'form':form,'css_and_js':blog_view_css_and_js_render , 'header':header_part} ,context_instance=RequestContext(req))
+        else :
+            return HttpResponse(u"error data")
+
+    else :
+        form = AddBlogTypeForm()
+        return render_to_response('add_blog_type.html',{'form':form,'css_and_js':blog_view_css_and_js_render , 'header':header_part} ,context_instance=RequestContext(req))
