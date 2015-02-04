@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+	{{% block header %}
+    {% include 'header.html' %}
+	{{ form.media }}
+    {% endblock %}
+
+	{% block main_container %}
+
+	{% block article %}
+    {% include 'article.html' %}
+    {% endblock %}
+
+    {% block leave_word %}
+    {% include 'leave_word.html' %}
+    {% endblock %}
+    
+
+  {% endblock %}

@@ -1,0 +1,20 @@
+		       <div class="blog-post">
+                   <div>	
+			          <h2 class="blog-post-title bold" style="color: #0075c9;">{{ article.title }}</h2>
+                      <p class="blog-post-meta">阅读 ({{article.read_times}})   by <a href="#"> 燃木</a> <{{ article.time }}> 
+					  {% if is_login %}
+					  <a href ="{{article.url}}_editor">编辑</a>
+					  {% endif %} 	 
+					  </p>
+			      </div>
+                   
+				<div>
+				  <pre><code>
+			      {% autoescape off %}
+		          {{article.context}}
+		          {% endautoescape %}
+			      </code></pre>
+		
+                </div>
+                <hr>
+            </div>

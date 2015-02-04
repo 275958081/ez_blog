@@ -1,0 +1,36 @@
+  
+  <div class="panel panel-info">
+  <div class="panel-body"><strong>文章分类</strong></div>
+  {% for blog_type in article_type_info_list %}
+
+      <div class="panel-heading">
+
+         <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{blog_type.type_name}}">
+               {{blog_type.type_name}} [ {{blog_type.type_article_number}} ]
+            </a>
+         </h4>
+
+      </div>
+
+      <div id="collapse_{{blog_type.type_name}}" class="panel-collapse collapse">
+         <div class="panel-body">
+           <ul>
+		    {% for article_tag in blog_type.article_tag_list %}
+            <li><a href="{{article_tag.url}}">{{article_tag.title}}</a></li>
+            {% endfor %}
+           </ul>
+         </div>
+      </div>
+
+ {% endfor %}
+</div>
+
+<script type="text/javascript">
+   $(function () { $('#collapseFour').collapse({
+      toggle: false
+   })});
+   $(function () { $('#collapseTwo').collapse('show')});
+   $(function () { $('#collapseThree').collapse('toggle')});
+   $(function () { $('#collapseOne').collapse('hide')});
+</script>  

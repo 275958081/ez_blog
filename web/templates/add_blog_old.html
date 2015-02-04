@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>add new blog</title>
+	{% autoescape off %}
+    {{css_and_js}}
+	{% endautoescape %}
+    {{ form.media }}
+</head>
+<body>
+{% autoescape off %}
+{{header}}
+{% endautoescape %}
+
+<div id="mainbody">
+   <div class="blogs">
+<form action="" method="post">{% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+	<br>
+	<br>
+	<label for="select_type"><font size ="4px" color="Ivory">select type</font></label>
+	<select name="select_type" id ="select_type">
+	
+	{% for type_item in type_items %}
+	<option value= "{{type_item}}">{{ type_item }}</option>
+	{% endfor %}
+	</select>
+	<br>
+	<br>
+    <input type="submit" value="Submit">
+</form>
+</div>
+</div>
+<!-- end mainbody -->
+</body>
+</html>

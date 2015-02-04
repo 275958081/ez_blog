@@ -1,0 +1,46 @@
+            <div id="comment"><!-- leave word list -->
+                <h4 class="bold"><span>{{ leave_word_number }}</span>条评论</h4>
+                <ul class="comment_list">
+                    {% for leave_word in  leave_word_list %}
+                        <li>
+                            <img src="/static/image/defalut_head.png" class="img-rounded headimg">
+
+                            <div class="msg">
+                                <cite class="bold">{{ leave_word.visitor_name }}</cite>
+
+                                <p>{{ leave_word.leave_word }}</p>
+
+                                <div>
+                                    <a class="date" href="#"> {{ leave_word.time }}</a>
+                                </div>
+                            </div>
+                            <hr>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+			<div><!-- leave word form -->
+             <h4 class="bold">发表评论</h4>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <label class="comment">呢称
+                                <span class="comment-form">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="nike_name">
+                        </div>
+                        <div class="col-md-7">
+                            <label class="comment">邮箱
+                                <span class="comment-form">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="email">
+                        </div>
+
+                        <div class="col-md-8">
+                            <label class="comment" >评论</label>
+                            <textarea class="form-control" rows="4" id="msg"></textarea>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" style="margin-top: 10px;" >提 交
+                    </button>
+            </div>

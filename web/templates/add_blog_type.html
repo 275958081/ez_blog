@@ -1,0 +1,36 @@
+
+
+{% extends "base.html" %}
+
+
+	{{% block header %}
+    {% include 'header.html' %}
+	{{ form.media }}
+    {% endblock %}
+
+{% block main_container %}
+	  <br>
+      <br>
+	  {% if article_type_list %}
+	       <h2>已有分类:</h2>
+           <ol>
+           {%   for article_type in article_type_list    %}
+		    <li><strong> {{article_type}} </strong></li>
+		   {% endfor %}
+     </ol>
+	  {% else %}
+	  <h2>还未有任何分类:</h2>
+	  {% endif %}
+
+	 <br>
+	 <br>
+
+	   <form action="" method="post">{% csrf_token %}
+           <table>
+            {{ form.as_table }}
+       </table>
+       <input type="submit" value="添加分类">
+      </form>
+{% endblock %}
+
+

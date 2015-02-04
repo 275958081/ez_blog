@@ -1,0 +1,49 @@
+
+
+{% extends "base.html" %}
+
+
+	{{% block header %}
+    {% include 'header.html' %}
+	{{ form.media }}
+    {% endblock %}
+
+{% block main_container %}
+<div id="mainbody">
+   <div class="blogs">
+		<form action="" method="post">{% csrf_token %}
+        <table>
+        {{ form.as_table }}
+       </table>
+	<br>
+	<br>
+	<br>
+	<br>  
+
+	<div class="row">
+	<div class="col-md-3">
+	
+	<span class="label label-info">select type</span>
+	</div>
+    <div class="col-md-3">
+		 <select name="select_type" id ="select_type">
+	      {% for article_type in article_type_list %}
+	      <option value= "{{article_type}}">{{ article_type }}</option>
+	      {% endfor %}
+	   </select>
+	</div>
+	</div>
+
+    
+      <br>
+	  <br>
+	   <div class="row">
+	   <input type="submit" value="Submit">
+	   </div>
+
+</form>
+</div>
+</div>
+{% endblock %}
+
+

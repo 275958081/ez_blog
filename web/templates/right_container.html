@@ -1,0 +1,30 @@
+
+
+<div class="div">
+ {% block CassettePlayer %}
+    {% include 'CassettePlayer.html' %}
+{% endblock %}
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-body">
+
+	<iframe width="100%" height="360" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=360&fansRow=2&ptype=1&speed=0&skin=8&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1667180522&verifier=743a2fc7&dpc=1"></iframe>
+
+	</div>
+</div>
+
+ {% block article_list %}
+    {% include 'article_list.html' %}
+{% endblock %}
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-body"><strong>友情链接</strong></div>
+        <ul class="article underline">
+        {% for f in friend_url %}
+            <li><a class="mousemove" href="{{ f.web_url }}">{{ f.show_name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>

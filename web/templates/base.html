@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<title>燃木的主页</title>
+
+	{{% block header %}
+    {% include 'header.html' %}
+    {% endblock %}
+</head>
+
+<body role="document" class="single single-post postid-2185 single-format-standard">
+<!-- Fixed navbar -->
+
+
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock %}
+
+
+<!-- /static/music/CassettePlayer/-->
+<!-- /static/images/CassettePlayer/ -->
+<div class="container theme-showcase" style="margin-top: 75px;" role="main">
+
+    <div class="row">
+        <div class="col-md-8" id='article_container'>
+		{% block main_container %}
+		{% endblock %}
+        </div>
+
+        <div class="col-md-4" id=right_container>
+
+		{% block right_container %}
+        {% include 'right_container.html' %}
+        {% endblock %}
+
+       </div>
+
+     </div>
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
+</div>
+</body>

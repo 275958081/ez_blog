@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/index.js"></script>
+</head>
+
+<body role="document">
+<!-- Fixed navbar -->
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+<div class="container theme-showcase" style="margin-top: 75px;" role="main">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    {% block header2 %}
+        {% include 'header2.html' %}
+    {% endblock %}
+    <div class="row">
+        <div class="col-md-8" id='article_container'>
+
+        </div>
+        <div class="col-md-4" id=right_container>
+         <div class = "row">
+		 {% for blog in total_blog_list %}
+		 <li><a href="{{blog.url}}">{{blog.index}} ,{{blog.titel}}</a></li>
+		 {% endfor %}
+		 </div>
+		 <div>
+		   {% block right_container %}
+           {% include 'right_container.html' %}
+           {% endblock %}
+		 </div>
+		
+	
+        </div>
+
+    </div>
+</div>
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
+</body>

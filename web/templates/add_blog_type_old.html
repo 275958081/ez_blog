@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<title>view-黑色时间轴个人博客模板</title>
+<meta name="keywords" content="黑色模板,个人网站模板,个人博客模板,博客模板,css3,html5,网站模板" />
+<meta name="description" content="这是一个有关黑色时间轴的css3 html5 网站模板" />
+	
+{% autoescape off %}
+{{css_and_js}}
+{% endautoescape %}
+{{ form.media }}
+</head>
+<body>
+{% autoescape off %}
+{{header}}
+{% endautoescape %}
+<!--header end-->
+<div id="mainbody">
+      
+
+  <div class="blogs">
+ 
+
+       <div id="index_view">
+	         <br>
+      <br>
+     <h2>已有分类</h2>
+     <ol>
+        {%   for blog_type in blog_type_list    %}
+		  <li><strong>{{blog_type}}</strong></li>
+		  {% endfor %}
+     </ol>
+	 <br>
+	 <br>
+
+	   <form action="" method="post">{% csrf_token %}
+           <table>
+            {{ form.as_table }}
+       </table>
+       <input type="submit" value="添加分类">
+      </form>
+ 
+    </div>
+    <!--bloglist end-->
+    <aside>
+      <div class="search">
+        <form class="searchform" method="get" action="#">
+          <input type="text" name="s" value="Search" onfocus="this.value=''" onblur="this.value='Search'">
+        </form>
+      </div>
+	  <div class="clicks">
+        <h2>博文列表</h2>
+        <ol>
+	        {%   for blog_tag in total_blog_list %}
+		    <li><span><a href=< &quot; blog_tag.url &quot; > blog_tag.title</a></span></li>
+		    {% endfor%}
+		</ol>
+	  </div>
+ 
+    </aside>
+  </div>
+  <!--blogs end--> 
+</div>
+<!--mainbody end-->
+
+<footer>
+  <div class="footer-mid">
+    <div class="links">
+      <h2>友情链接</h2>
+      <ul>
+        <li><a href="/">杨青个人博客</a></li>
+        <li><a href="http://www.3dst.com">3DST技术服务中心</a></li>
+      </ul>
+    </div>    
+</footer>
+<!-- jQuery仿腾讯回顶部和建议 代码开始 -->
+<div id="tbox"> <a id="togbook" href="/e/tool/gbook/?bid=1"></a> <a id="gotop" href="javascript:void(0)"></a> </div>
+<!-- 代码结束 -->
+</body>
+</html>
